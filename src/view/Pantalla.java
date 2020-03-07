@@ -11,7 +11,6 @@ public class Pantalla {
 	public Pantalla(PApplet app) {
 		this.app = app;
 		this.control = new ControlThis(app);
-		
 	}
 	
 	public void controlJuego(){

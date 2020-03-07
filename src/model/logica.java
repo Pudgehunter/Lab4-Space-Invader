@@ -92,6 +92,19 @@ public class logica {
 				if(listEnemy.get(i).getpY() > app.height) {
 					reinicio = true;
 				}
+				app.text("Vida ="+hero.getHp(),500,100);
+				float a = PApplet.dist(listEnemy.get(i).getpX(),
+						listEnemy.get(i).getpY(),
+						hero.getpX(),
+						hero.getpY());
+				if(a < 55) {
+					app.background(255);
+					hero.vida();
+					listEnemy.remove(i);
+					if(hero.getHp() == 0) {
+						pantalla = 3;
+					}
+				}
 			}
 			
 			if(corner) {
@@ -118,6 +131,7 @@ public class logica {
 					}*/
 					float d = PApplet.dist(listBalas.get(i).getpX(),listBalas.get(i).getpY(),listEnemy.get(j).getpX(),listEnemy.get(j).getpY());
 					if(d < listBalas.get(i).getR() + listEnemy.get(j).getR()){
+						
 						if(listBalas == null || listBalas.size() == 0) {
 							listBalas.add(new Balas(app,hero.getpX()+25,hero.getpY()));
 						} else {
@@ -134,6 +148,7 @@ public class logica {
 				pantalla = 2;
 			}
 			
+			
 			break;
 		case 2:
 			app.background(255);
@@ -141,6 +156,12 @@ public class logica {
 			app.textSize(50);
 			app.text("You win",app.width/2-100,app.height/2);
 	
+			break;
+		case 3:
+			app.background(255);
+			app.fill(0);
+			app.textSize(50);
+			app.text("You lose",app.width/2-100,app.height/2);
 			break;
 
 		default:
@@ -163,9 +184,18 @@ public class logica {
 		}
 		
 		if(app.keyCode == LEFT) {
+			if(hero.getpX() > 0) {
 			hero.movimientoSuave(-1);
+			} else {
+				hero.movimientoSuave(0);
+			}
+			
 		}else if(app.keyCode == RIGHT){
-			hero.movimientoSuave(+1);
+			if(hero.getpX() < 650) {
+				hero.movimientoSuave(+1);
+			} else {
+				hero.movimientoSuave(0);
+			}
 		}
 	}
 	
